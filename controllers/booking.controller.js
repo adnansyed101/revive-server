@@ -34,3 +34,14 @@ export const createBooking = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const getUserBookings = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const service = await Booking.find({ "bookingDetails.userEmail": email });
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
