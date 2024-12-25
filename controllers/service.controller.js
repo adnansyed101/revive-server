@@ -57,3 +57,14 @@ export const getSingleService = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const getUserCreatedServices = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const service = await Service.find({ "provider.email": email });
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
