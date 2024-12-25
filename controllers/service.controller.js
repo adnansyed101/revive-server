@@ -93,3 +93,22 @@ export const updateService = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+// Delete Service
+export const deleteService = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Invalid Service Id" });
+  }
+
+  try {
+    await Service.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: "Service Deleted" });
+  } catch (err) {
+    console.error("Error in Deleting movies" + err.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};

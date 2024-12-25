@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createService,
+  deleteService,
   getServices,
   getSingleService,
   getUserCreatedServices,
@@ -23,5 +24,8 @@ router.get("/created/:email", getUserCreatedServices);
 
 // Update a Service
 router.put("/update/:id", updateService);
+
+// Update a Service
+router.delete("/delete/:id", deleteService);
 
 export default router;
