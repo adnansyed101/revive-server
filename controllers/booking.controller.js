@@ -17,7 +17,9 @@ export const createBooking = async (req, res) => {
     !service.bookingDetails.serviceAddress ||
     !service.bookingDetails.serviceInstruction ||
     !service.bookingDetails.userName ||
-    !service.bookingDetails.userEmail
+    !service.bookingDetails.userEmail ||
+    !service.bookingDetails.imgURL 
+
   ) {
     return res
       .status(400)
@@ -40,6 +42,17 @@ export const getUserBookings = async (req, res) => {
 
   try {
     const service = await Booking.find({ "bookingDetails.userEmail": email });
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const getServiceToDo = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const service = await Booking.find({ "provider.email": email });
     res.status(200).json({ success: true, data: service });
   } catch (err) {
     res.status(500).json({ success: false, message: "Server Error" });
