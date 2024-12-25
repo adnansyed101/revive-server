@@ -3,6 +3,7 @@ import {
   createService,
   getServices,
   getSingleService,
+  getUserCreatedServices,
 } from "../controllers/service.controller.js";
 
 const router = express.Router();
@@ -14,6 +15,9 @@ router.get("/all-services", getServices);
 router.post("/add-service", createService);
 
 // Get a single Service
-router.get("/:id", getSingleService);
+router.get("/service/:id", getSingleService);
+
+// Get a User specific Services
+router.get("/created/:email", getUserCreatedServices);
 
 export default router;
