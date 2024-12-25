@@ -1,4 +1,5 @@
 import Service from "../models/service.model.js";
+import mongoose from "mongoose";
 
 // Create a single Service
 export const createService = async (req, res) => {
@@ -36,6 +37,23 @@ export const getServices = async (req, res) => {
     res.status(200).json({ success: true, data: services });
   } catch (err) {
     console.error("Error in fetching movie" + err.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const getSingleService = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Invalid Service Id" });
+  }
+
+  try {
+    const service = await Service.findById(id);
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
