@@ -20,6 +20,10 @@ const bookingDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imgURL: {
+    type: String,
+    required: true,
+  },
   userName: {
     type: String,
     required: true,
