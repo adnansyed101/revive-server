@@ -4,6 +4,7 @@ import {
   getServices,
   getSingleService,
   getUserCreatedServices,
+  updateService,
 } from "../controllers/service.controller.js";
 
 const router = express.Router();
@@ -19,5 +20,8 @@ router.get("/service/:id", getSingleService);
 
 // Get a User specific Services
 router.get("/created/:email", getUserCreatedServices);
+
+// Update a Service
+router.put("/update/:id", updateService);
 
 export default router;
