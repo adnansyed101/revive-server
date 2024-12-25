@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/api/service", serviceRouter);
+app.use("/api/services", serviceRouter);
 app.use("/api/booking", bookingRouter);
 
 app.listen(PORT, () => {
