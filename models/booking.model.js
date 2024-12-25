@@ -20,6 +20,14 @@ const bookingDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userName: {
+    type: String,
+    required: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
+  },
   serviceDate: {
     type: Date,
     required: true,

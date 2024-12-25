@@ -15,7 +15,9 @@ export const createBooking = async (req, res) => {
     !service.bookingDetails.serviceDate ||
     !service.bookingDetails.serviceStatus ||
     !service.bookingDetails.serviceAddress ||
-    !service.bookingDetails.serviceInstruction
+    !service.bookingDetails.serviceInstruction ||
+    !service.bookingDetails.userName ||
+    !service.bookingDetails.userEmail
   ) {
     return res
       .status(400)
