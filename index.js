@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import providerRouter from "./routes/provider.route.js";
 import serviceRouter from "./routes/service.route.js";
 import { connectDB } from "./config/db.js";
 dotenv.config();
@@ -16,7 +15,6 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/api/provider", providerRouter);
 app.use("/api/service", serviceRouter);
 
 app.listen(PORT, () => {
