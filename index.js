@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import serviceRouter from "./routes/service.route.js";
+import bookingRouter from "./routes/booking.route.js";
 import { connectDB } from "./config/db.js";
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/service", serviceRouter);
+app.use("/api/booking", bookingRouter);
 
 app.listen(PORT, () => {
   connectDB();
