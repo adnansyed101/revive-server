@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+const providerSchema = new mongoose.Schema({
+  imgURL: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+});
+
 const serviceSchema = new mongoose.Schema({
   imgURL: {
     type: String,
@@ -21,6 +36,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  provider: providerSchema,
 });
 
 const Service = mongoose.model("Service", serviceSchema);
