@@ -33,8 +33,14 @@ export const createService = async (req, res) => {
 
 // Get All services
 export const getServices = async (req, res) => {
+  const { search } = req.query;
+  let option = {};
+  if (search) {
+    option = { serviceName: { $regex: search, $options: "i" } };
+  }
+
   try {
-    const services = await Service.find({});
+    const services = await Service.find(option);
     res.status(200).json({ success: true, data: services });
   } catch (err) {
     console.error("Error in fetching movie" + err.message);
