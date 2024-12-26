@@ -3,6 +3,7 @@ import {
   createService,
   deleteService,
   getPopularServices,
+  getServiceAmount,
   getServices,
   getSingleService,
   getUserCreatedServices,
@@ -14,6 +15,9 @@ const router = express.Router();
 
 // Get All Services
 router.get("/all-services", getServices);
+
+// Get Amount of services
+router.get("/all-services/count", getServiceAmount);
 
 // Create a service
 router.post("/add-service", verifyToken, createService);

@@ -31,16 +31,34 @@ export const createService = async (req, res) => {
   }
 };
 
-// Get All services
-export const getServices = async (req, res) => {
-  const { search } = req.query;
-  let option = {};
-  if (search) {
-    option = { serviceName: { $regex: search, $options: "i" } };
-  }
+export const getServiceAmount = async (req, res) => {
+  const search = req.query.search;
+
+  let query = {
+    serviceName: { $regex: search, $options: "i" },
+  };
 
   try {
-    const services = await Service.find(option);
+    const servicesCount = await Service.countDocuments(query);
+    res.status(200).json({ success: true, data: servicesCount });
+  } catch (err) {
+    console.error("Error in fetching movie" + err.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+// Get All services
+export const getServices = async (req, res) => {
+  const search = req.query.search;
+  const page = parseInt(req.query.page);
+  const size = parseInt(req.query.size);
+
+  let option = { serviceName: { $regex: search, $options: "i" } };
+
+  try {
+    const services = await Service.find(option)
+      .skip(page * size)
+      .limit(size);
     res.status(200).json({ success: true, data: services });
   } catch (err) {
     console.error("Error in fetching movie" + err.message);
