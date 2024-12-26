@@ -1,4 +1,5 @@
 import Booking from "../models/booking.model.js";
+import mongoose from "mongoose";
 
 export const createBooking = async (req, res) => {
   const service = req.body;
@@ -18,8 +19,7 @@ export const createBooking = async (req, res) => {
     !service.bookingDetails.serviceInstruction ||
     !service.bookingDetails.userName ||
     !service.bookingDetails.userEmail ||
-    !service.bookingDetails.imgURL 
-
+    !service.bookingDetails.imgURL
   ) {
     return res
       .status(400)
@@ -54,6 +54,24 @@ export const getServiceToDo = async (req, res) => {
   try {
     const service = await Booking.find({ "provider.email": email });
     res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const updateStatus = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const updated = {
+    $set: { "bookingDetails.serviceStatus": status },
+  };
+
+  try {
+    const updatedService = await Booking.findByIdAndUpdate(id, updated, {
+      new: true,
+    });
+    res.status(200).json({ success: true, data: updatedService });
   } catch (err) {
     res.status(500).json({ success: false, message: "Server Error" });
   }
