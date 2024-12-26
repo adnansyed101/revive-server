@@ -15,7 +15,7 @@ router.post("/add-booking", verifyToken, createBooking);
 // Get all user bookings
 router.get("/booked/user/:email", verifyToken, getUserBookings);
 
-// Get all user bookings
+// Get all Service To Do
 router.get("/booked/serviceToDo/:email", verifyToken, getServiceToDo);
 
 // Update booking status
