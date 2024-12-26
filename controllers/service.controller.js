@@ -69,6 +69,11 @@ export const getSingleService = async (req, res) => {
 // Get services according to user
 export const getUserCreatedServices = async (req, res) => {
   const { email } = req.params;
+  const decodedEmail = req.user?.email;
+
+  if (decodedEmail !== email) {
+    return res.status(401).send({ message: "Unauthorized Access" });
+  }
 
   try {
     const service = await Service.find({ "provider.email": email });

@@ -39,6 +39,11 @@ export const createBooking = async (req, res) => {
 
 export const getUserBookings = async (req, res) => {
   const { email } = req.params;
+  const decodedEmail = req.user?.email;
+
+  if (decodedEmail !== email) {
+    return res.status(401).send({ message: "Unauthorized Access" });
+  }
 
   try {
     const service = await Booking.find({ "bookingDetails.userEmail": email });
@@ -50,6 +55,11 @@ export const getUserBookings = async (req, res) => {
 
 export const getServiceToDo = async (req, res) => {
   const { email } = req.params;
+  const decodedEmail = req.user?.email;
+
+  if (decodedEmail !== email) {
+    return res.status(401).send({ message: "Unauthorized Access" });
+  }
 
   try {
     const service = await Booking.find({ "provider.email": email });

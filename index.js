@@ -2,6 +2,7 @@ import { connectDB } from "./config/db.js";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import serviceRouter from "./routes/service.route.js";
 import bookingRouter from "./routes/booking.route.js";
 import jwtRoute from "./routes/jwt.route.js";
@@ -19,6 +20,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 connectDB();
 
