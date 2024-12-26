@@ -12,14 +12,15 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+connectDB();
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello from Services");
 });
 
 app.use("/api/services", serviceRouter);
 app.use("/api/booking", bookingRouter);
 
 app.listen(PORT, () => {
-  connectDB();
   console.log("Server running at port " + PORT);
 });
