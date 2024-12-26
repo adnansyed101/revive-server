@@ -123,3 +123,14 @@ export const deleteService = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+// Get Popular Service/ Get First 4 services
+export const getPopularServices = async (req, res) => {
+  try {
+    const services = await Service.find({}).sort({ price: -1 }).limit(4);
+    res.status(200).json({ success: true, data: services });
+  } catch (err) {
+    console.error("Error in fetching movie" + err.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
