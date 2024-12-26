@@ -3,6 +3,7 @@ import {
   createBooking,
   getServiceToDo,
   getUserBookings,
+  updateStatus,
 } from "../controllers/booking.controller.js";
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.get("/booked/user/:email", getUserBookings);
 
 // Get all user bookings
 router.get("/booked/serviceToDo/:email", getServiceToDo);
+
+// Update booking status
+router.patch("/booked/update/:id", updateStatus);
 
 export default router;
