@@ -13,4 +13,4 @@ In this REST API a user can perform CRUD operations. The api is protected using 
 - Uses JWT as security protocol.
 
 
-# Assignment Category -- 02.
+### [Client Repo Link](https://github.com/adnansyed101/revive-rewire-client)
