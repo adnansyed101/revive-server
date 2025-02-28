@@ -6,7 +6,7 @@ export const createJWT = async (req, res) => {
 
   const token = jwt.sign(email, process.env.SECRET_KEY, { expiresIn: "3h" });
 
-  res
+  return res
     .cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -17,7 +17,7 @@ export const createJWT = async (req, res) => {
 
 // Clear cookie on logout
 export const clearCookie = async (req, res) => {
-  res
+  return res
     .clearCookie("token", {
       maxAge: 0,
       secure: process.env.NODE_ENV === "production",
@@ -30,16 +30,19 @@ export const verifyToken = (req, res, next) => {
   const token = req.cookies?.token;
 
   if (!token) {
-    return res.status(401).send({ message: "Unauthorized Access" });
+    return res
+      .status(401)
+      .send({ message: "Unauthorized Access. Please Provide token." });
   }
 
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
-      return res.status(401).send({ message: "Unauthorized Access" });
+      return res
+        .status(401)
+        .send({ message: "Unauthorized Access. Invalid Token." });
     } else {
       req.user = decoded;
+      next();
     }
   });
-
-  next();
 };
