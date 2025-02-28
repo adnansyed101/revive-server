@@ -58,14 +58,16 @@ export const getServiceToDo = async (req, res) => {
   const decodedEmail = req.user?.email;
 
   if (decodedEmail !== email) {
-    return res.status(401).send({ message: "Unauthorized Access" });
+    return res
+      .status(401)
+      .send({ message: "Unauthorized Access. Token is Invalid." });
   }
 
   try {
     const service = await Booking.find({ "provider.email": email });
     res.status(200).json({ success: true, data: service });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Server Error." });
   }
 };
 
